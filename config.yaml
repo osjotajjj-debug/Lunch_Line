@@ -1,0 +1,57 @@
+timer:
+  pausa_entre_chamadas: 3
+  segundos: 30
+turmas:
+  quarta:
+    fila1:
+    - 1ºC
+    - 1ºD
+    - 2ºA
+    - 1ºA
+    - 1ºB
+    - 1D
+    fila2:
+    - 3ºB
+    - 3ºC
+    - 2ºB
+    - 3ºA
+  quinta:
+    fila1:
+    - 1ºD
+    - 2ºA
+    - 1ºA
+    - 1ºB
+    - 1ºC
+    fila2:
+    - 3ºC
+    - 2ºB
+    - 3ºA
+    - 3ºB
+  segunda:
+    fila1: []
+    fila2: []
+  sexta:
+    fila1:
+    - 2ºA
+    - 1ºA
+    - 1ºB
+    - 1ºC
+    - 1ºD
+    - 1F
+    fila2:
+    - 2ºB
+    - 3ºA
+    - 3ºB
+    - 3ºC
+  terca:
+    fila1:
+    - 1ºB
+    - 1ºC
+    - 1ºD
+    - 2ºA
+    - 1ºA
+    fila2:
+    - 3ºA
+    - 3ºB
+    - 3ºC
+    - 2ºB
