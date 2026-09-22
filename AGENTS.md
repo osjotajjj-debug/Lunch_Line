@@ -23,6 +23,12 @@ O sistema foi **migrado do notebook para o celular**. O programa principal agora
 - Navegação: clicar em dia estando na CONFIG volta ao display; botões "← VOLTAR SEM SALVAR" e "SALVAR E VOLTAR"
 - Detalhe voz: precisa **tocar uma vez na tela** antes para liberar áudio (política de autoplay do celular)
 
+### Logo da escola (cabeçalho)
+- O logo da escola está **embutido no HTML como PNG transparente** (base64, `data:image/png`), exibido ao lado do título "FILA DO ALMOÇO"
+- Fonte: `identidade visual/` (foto JPEG da logo da escola → convertida removendo o fundo ≈preto/escuro → PNG com transparência, 512px, bem menor que a original)
+- Detalhe CSS: o contêiner `.logo-bloco` usa `background: transparent` (a versão anterior tinha `background: #fff`, que criava uma caixa branca feia no cabeçalho escuro — já corrigido)
+- Se trocar a logo no futuro: gerar PNG transparente pequeno (~400-700px) com `identidade visual/` e embutir como data URI (mantém o app num arquivo só)
+
 ## Arquivos do projeto
 - `fila_almoco.html` — versão celular (USAR este)
 - `main.py` — versão antiga do notebook (PyQt6 + Flask + QR). Mantida, mas **fora de uso**
