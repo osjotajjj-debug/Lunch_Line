@@ -5,6 +5,8 @@
 O sistema foi **migrado do notebook para o celular**. O programa principal agora é um único arquivo HTML:
 
 - **`fila_almoco.html`** ← arquivo principal (versão celular, roda offline)
+  - Obs: atualmente este arquivo está salvo na pasta como `fila_almoco parte final 100% confirmado.html` (mesmo conteúdo)
+  - Tip: acesse rápido com `Start-Process "fila_almoco parte final 100% confirmado.html"`
 
 ### Como funciona o novo fluxo
 1. Página web única (`fila_almoco.html`), roda **offline** no navegador do celular (sem internet, WiFi ou servidor)
