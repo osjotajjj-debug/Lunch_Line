@@ -549,7 +549,7 @@ var PADRAO = {
     terca:   {fila1:["1ºB","1ºC","1ºD","2ºA","1ºA"], fila2:["3ºA","3ºB","3ºC","2ºB"]},
     quarta:  {fila1:["1ºC","1ºD","2ºA","1ºA","1ºB"], fila2:["3ºB","3ºC","2ºB","3ºA"]},
     quinta:  {fila1:["1ºD","2ºA","1ºA","1ºB","1ºC"], fila2:["3ºC","2ºB","3ºA","3ºB"]},
-    sexta:   {fila1:["2ºA","1ºA","1ºB","1ºC","1ºD","1F"], fila2:["2ºB","3ºA","3ºB","3ºC"]}
+    sexta:   {fila1:["2ºA","1ºA","1ºB","1ºC","1ºD"], fila2:["2ºB","3ºA","3ºB","3ºC"]}
   },
   timer: {segundos:30, pausa:5}
 };
@@ -562,12 +562,34 @@ var estado = {
 };
 var cfgDiaIndex = 0;
 
+// Remove turmas de teste ja salvas no celular ("1F", "10ºA", "10A"...)
+function limparTurmasTeste(lista) {
+  if (!Array.isArray(lista)) return [];
+  return lista.filter(function(t) {
+    var s = String(t).trim().toUpperCase().replace(/[°º]/g, "");
+    if (s === "1F") return false;
+    var m = s.match(/^(\d+)/);
+    return !(m && parseInt(m[1], 10) > 3);
+  });
+}
+
+function limparConfigTestes(c) {
+  try {
+    DIAS.forEach(function(d) {
+      var t = c.turmas[d];
+      t.fila1 = limparTurmasTeste(t.fila1);
+      t.fila2 = limparTurmasTeste(t.fila2);
+    });
+  } catch (e) {}
+  return c;
+}
+
 function carregarConfig() {
   try {
     var s = localStorage.getItem("filaAlmocoConfig");
-    if (s) return JSON.parse(s);
+    if (s) return limparConfigTestes(JSON.parse(s));
   } catch (e) {}
-  return JSON.parse(JSON.stringify(PADRAO));
+  return limparConfigTestes(JSON.parse(JSON.stringify(PADRAO)));
 }
 
 function salvarConfigLocal() {
@@ -768,13 +790,28 @@ if ("speechSynthesis" in window) {
   }, 2000);
 }
 
+var ORDENADO = ["zero","primeiro","segundo","terceiro","quarto","quinto","sexto","setimo","oitavo","nono","decimo",
+                "decimo primeiro","decimo segundo","decimo terceiro","decimo quarto","decimo quinto"];
+
+// Converte "1ºA" em "primeiro ano A" para a voz falar certo (na tela continua igual)
+function turmaParaFala(t) {
+  var s = String(t == null ? "" : t);
+  var m = s.match(/^\s*(\d+)\s*[º°oO]?\s*(.*)$/);
+  if (!m) return s;
+  var grau = parseInt(m[1], 10);
+  var resto = m[2].trim().toUpperCase();
+  var palavra = (grau >= 0 && grau < ORDENADO.length) ? ORDENADO[grau] : (grau + "º ano");
+  if (!resto) return palavra + " ano";
+  return palavra + " ano " + resto.split("").join(" ");
+}
+
 function anunciar(turma, n) {
   beep();
   try {
     carregarVozes();
     speechSynthesis.cancel();
 
-    var utter = new SpeechSynthesisUtterance(turma + ", dirija-se a fila " + n);
+    var utter = new SpeechSynthesisUtterance(turmaParaFala(turma) + ", dirija-se a fila " + n);
     utter.lang = "pt-BR";
     utter.rate = 0.9;
     utter.pitch = 1;

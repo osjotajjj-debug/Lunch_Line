@@ -1,12 +1,18 @@
 # AGENTS.md — Projeto Fila do Almoco
 
-## Estado Atual (atualizado em 08/09/2026)
+## Estado Atual (atualizado em 06/10/2026)
 
 O sistema foi **migrado do notebook para o celular**. O programa principal agora é um único arquivo HTML:
 
 - **`fila_almoco.html`** ← arquivo principal (versão celular, roda offline)
-  - Obs: atualmente este arquivo está salvo na pasta como `fila_almoco parte final 100% confirmado.html` (mesmo conteúdo)
-  - Tip: acesse rápido com `Start-Process "fila_almoco parte final 100% confirmado.html"`
+  - Obs: atualmente este arquivo está salvo na pasta como `fila_almoco parte final 100% confirmado 2.0.html` (mesmo conteúdo)
+  - Tip: acesse rápido com `Start-Process "fila_almoco parte final 100% confirmado 2.0.html"`
+
+### Ajustes de 06/10/2026
+- **Voz por extenso**: `turmaParaFala()` converte `1ºA` → "primeiro ano A",
+  `2ºB` → "segundo ano B", `3ºC` → "terceiro ano C" (só na fala, a tela mantém `1ºA`)
+- **Limpeza de turmas de teste**: `limparTurmasTeste()` roda em `carregarConfig()`
+  e apaga `1F` e anos acima do 3º de **todos** os celulares (localStorage) na abertura
 
 ### Como funciona o novo fluxo
 1. Página web única (`fila_almoco.html`), roda **offline** no navegador do celular (sem internet, WiFi ou servidor)
@@ -36,14 +42,14 @@ O sistema foi **migrado do notebook para o celular**. O programa principal agora
 - `config.yaml` — turmas/timer em formato YAML (usado pela versão antiga)
 - `projeto-fila-almoco.md` — documentação do projeto (usa "1A" mas config usa "1ºA")
 - `README.md`
-- `registro-sessao-2026-09-08.md` — registro detalhado da sessão de hoje
+- `registro-sessao-2026-09-08.md` — registro da sessão de migração para o celular
+- `registro-sessao-2026-10-06.md` — registro da sessão de voz por extenso + limpeza de turmas
 - `imagens do projeto/` — capturas de tela
 
-## GitHub (em andamento)
+## GitHub (sincronizado)
 - Repositório: https://github.com/osjotajjj-debug/Lunch_Line.git
 - Git local configurado: user.name `osjotajjj-debug`, user.email `osjotajjj@gmail.com`
-- Commit local: `6841784` (11 arquivos)
-- **PENDENTE**: autenticação no GitHub (gh auth login / device code) e `git push -u origin main`
+- Autenticação ativa (`gh auth status`) e `main` sincronizada com `origin/main`
 - Instalados via winget: Git 2.55.0.3 e GitHub CLI 2.100.0
 
 ## Anotações úteis
